@@ -1,9 +1,10 @@
 #seed = xxxx
 #flag = "REDACTED"
 
-import random,time
+import time
+import secrets
 
-random.seed(seed+time.time())
+secrets.SystemRandom().seed(seed+time.time())
 
 money = 100
 
@@ -31,7 +32,7 @@ while money > 0:
     
     money -= wager
     
-    num = random.randint(lower,upper)
+    num = secrets.SystemRandom().randint(lower,upper)
     if num == guess:
         print("You guessed the right answer, you got", (upper-lower)*wager, "dollars")
         money += (upper-lower)*wager

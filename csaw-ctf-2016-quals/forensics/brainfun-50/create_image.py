@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import png
-from random import shuffle
 import pdb
+import secrets
 
 def pad_message(m, p):
 
@@ -59,6 +59,6 @@ for r in range(0, 256, 16):
         for b in range(0, 256, 32):
             rgb_list.append([r, g, b, ord(message[counter])])
             counter += 1
-shuffle(rgb_list)
+secrets.SystemRandom().shuffle(rgb_list)
 image_list = create_image_list(rgb_list, 32, 16)
 png.from_array(image_list, 'RGBA').save('brainfun.png')

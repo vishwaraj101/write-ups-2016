@@ -1,9 +1,9 @@
-import random
 import sys
+import secrets
 
 class CoinSlot:
     def __init__(self, max_cents):
-        self.cents = random.randint(1, max_cents)
+        self.cents = secrets.SystemRandom().randint(1, max_cents)
 
     def get_input(self):
         print("$10,000 bills: ", end = "")
@@ -160,7 +160,7 @@ found {}".format(c1, self.c1))
 
 
 def main():
-    random.seed()
+    secrets.SystemRandom().seed()
     max_cent_lst = [10**1, 10**3, 10**5, 10**7];
     for max_cents in max_cent_lst:
         for _ in range(0, 100):

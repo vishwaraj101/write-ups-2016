@@ -1,5 +1,6 @@
 import array
 import struct
+import secrets
 
 
 
@@ -195,7 +196,6 @@ class bcs(object):
 
 def check_all():
     import os
-    import random
     checks_number = 500
     # padding
     for n in xrange(0, checks_number, 1):
@@ -223,7 +223,7 @@ def check_all():
     # bcs
     for i in xrange(checks_number):
         cryptor = bcs(os.urandom(4*6), os.urandom(8))
-        l = random.randrange(100, 801)
+        l = secrets.SystemRandom().randrange(100, 801)
         plaintext = os.urandom(l)
         iv = os.urandom(8)
         ciphertext = cryptor.encrypt(plaintext, iv)

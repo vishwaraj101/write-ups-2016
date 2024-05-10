@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
+import secrets
+
 # This code uses WebSockets which requires Python 3.5 or newer
 assert sys.version_info >= (3,5)
 
@@ -11,7 +13,6 @@ assert pkg_resources.get_distribution("asyncio").version >= '3.4.4'
 import asyncio
 import websockets
 import numpy as np
-import random
 import hashlib, itertools, binascii
 
 
@@ -50,7 +51,7 @@ async def client_handler(websocket, path):
 		return True
 	
 	# Client should provide a proof of work
-	answ = random.randint(0, 2**ANSWER_SIZE - 1)
+	answ = secrets.SystemRandom().randint(0, 2**ANSWER_SIZE - 1)
 	answ = hex(answ)[2:]
 	answ = answ.zfill(ANSWER_SIZE//4)
 

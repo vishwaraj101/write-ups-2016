@@ -1,16 +1,16 @@
 #key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-import random
+import secrets
 
 def genPBox():
     output = list(range(16))
-    random.shuffle(output)
+    secrets.SystemRandom().shuffle(output)
     return output
 
 def genSBox():
     output = []
     poss = list(range(16))
-    random.shuffle(poss)
+    secrets.SystemRandom().shuffle(poss)
     for i in range(4):
         output.append([0 for i in range(4)])
         for j in range(4):

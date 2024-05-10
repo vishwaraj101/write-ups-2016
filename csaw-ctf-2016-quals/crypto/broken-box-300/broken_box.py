@@ -3,7 +3,8 @@ import errno
 import os
 import signal
 import SocketServer
-import random, time
+import time
+import secrets
 
 class TimeoutError(Exception):
     pass
@@ -34,7 +35,7 @@ def sign(req):
         d = 131811419667704353419669934273801498497646935210532028120447799308664007960357278340261723808572637548407550908403239344903997788296564439667659716110934822412855421586673808904193606481137679044132688115472132575150399986901493501056787817443487153162937855786664238603417924072736209641094219963164897214757
         N = 172794691472052891606123026873804908828041669691609575879218839103312725575539274510146072314972595103514205266417760425399021924101213043476074946787797027000946594352073829975780001500365774553488470967261307428366461433441594196630494834260653022238045540839300190444686046016894356383749066966416917513737
         bits = list(range(0, 1025))
-        random.shuffle(bits)
+        secrets.SystemRandom().shuffle(bits)
         while True:
             req.sendall("Input an number(0~9999) to be signed:")
             msg = recv(req, 5)
@@ -46,7 +47,7 @@ def sign(req):
                 req.sendall("Wrong input, quitting...")
                 return
 
-            if random.random() < 0.5:
+            if secrets.SystemRandom().random() < 0.5:
                 pos = bits.pop()
                 enc = pow(g, d^(2**pos), N)
             else:
@@ -59,7 +60,7 @@ def sign(req):
 
 class incoming(SocketServer.BaseRequestHandler):
     def handle(self):
-        random.seed(time.time())
+        secrets.SystemRandom().seed(time.time())
         req = self.request
         sign(req)
 
